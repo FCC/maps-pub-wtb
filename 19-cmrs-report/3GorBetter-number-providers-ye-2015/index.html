@@ -1,3 +1,4 @@
+<!-- Code provided by FCC WTB -->
 <!DOCTYPE html>
 <html>
 
@@ -5,7 +6,7 @@
     <meta charset=utf-8 />
     <title>Mobile Wireless 3G or Better Coverage by Number of Providers-YE 2015</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-    <link href="https://api.tiles.mapbox.com/mapbox.js/v2.1.6/mapbox.css" rel="stylesheet">
+    <link href="https://api.tiles.mapbox.com/mapbox.js/v3.0.1/mapbox.css" rel="stylesheet">
     <link href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/leaflet.fullscreen.css" rel="stylesheet">
     <style>
     body {
@@ -35,7 +36,7 @@
     }
     </style>
 </head>
-    
+
 <body>
     <!--Legend-->
     <div id="legend_Mosaik" style="display:none;">
@@ -79,23 +80,27 @@
             <small>Source: FCC Form 477 (Dec. 2015).</small>
     </div>
     <div id="map"></div>
-    <script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.6/mapbox.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://api.tiles.mapbox.com/mapbox.js/v3.0.1/mapbox.js"></script>
     <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/Leaflet.fullscreen.min.js"></script>
     <script>
-    L.mapbox.accessToken = 'pk.eyJ1IjoiZmNjMjA1NTQiLCJhIjoiVHlCZGNNUSJ9.-Io09_10w_Ziyx-RUSB_cQ';
+    L.mapbox.accessToken = 'pk.eyJ1IjoiY29tcHV0ZWNoIiwiYSI6InMyblMya3cifQ.P8yppesHki5qMyxTc2CNLg';
 
-    var map = L.mapbox.map('map', 'fcc20554.lk1mdek5', {
+    var map = L.mapbox.map('map', 'fcc.k74ed5ge', {
         attributionControl: false,
         center: [35, -96],
         zoom: 4,
         minZoom: 4,
-        maxZoom: 7
+        maxZoom: 6,
+        legendControl: {
+            position: 'bottomleft'
+        }
     });
     //set attribution to false, so doesn't pull layer names (i.e., "OverallMobile_18th")
 
     // add new attribution, in place of auto-generated -adds Leaflet attribution
     var credits = L.control.attribution({
-        position: 'bottomleft'
+        position: 'bottomright'
     }).addTo(map);
     //need position option, otherwise interferes with legend
 
@@ -107,13 +112,13 @@
 
 
     L.control.layers({
-        'Based on Mosaik': L.mapbox.tileLayer('fcc20554.9tmbr3hz'),
-        'Based on FCC Form 477': L.mapbox.tileLayer('fcc20554.938rfuio').addTo(map),
+        'Based on FCC Form 477': L.mapbox.tileLayer('fcc.1agkxuoc').addTo(map),
+        'Based on Mosaik': L.mapbox.tileLayer('fcc.2peb1z75')
     }, {
-        'States': L.mapbox.tileLayer('fcc20554.WLB_State').addTo(map)
+        'States': L.mapbox.tileLayer('fcc.88sbhq44').addTo(map)
     }, {
         collapsed: false,
-        position: 'bottomright'
+        position: 'topleft'
     }).addTo(map);
 
     //adds legend
@@ -136,6 +141,26 @@
             map.legendControl.removeLegend(document.getElementById('legend_Mosaik').innerHTML);
         }
     });
+
+    // force layer control to remain expanded
+    $('.leaflet-control-layers').hover(function(){
+        $(this).addClass('leaflet-control-layers-expanded');
+    });
+
+    map.on('click', function(eventLayer) {
+        $('.leaflet-control-layers').addClass('leaflet-control-layers-expanded');
+    });
+
+    // reposition full screen control
+    var fullScrnCtrl = $('.leaflet-control-fullscreen').clone();
+    $('.leaflet-control-fullscreen').remove();
+    $('.leaflet-control-zoom').after(fullScrnCtrl);
+
+    // point full screen mode to URL (iframe workaround)
+    $('.leaflet-control-fullscreen-button').attr({
+        href: 'https://fcc.github.io/maps-pub-wtb/19-cmrs-report/3GorBetter-number-providers-ye-2015/'
+    });
+
     </script>
 </body>
 
