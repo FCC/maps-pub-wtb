@@ -42,7 +42,7 @@
     <script>
     L.mapbox.accessToken = 'pk.eyJ1IjoiZmNjMjA1NTQiLCJhIjoiVHlCZGNNUSJ9.-Io09_10w_Ziyx-RUSB_cQ';
 
-    var map = L.mapbox.map('map', 'fcc20554.lk1mdek5', {
+    var map = L.mapbox.map('map', 'fcc.k74ed5ge', {
         fullscreenControl: true,
         attributionControl: false,
         center: [35, -96],
@@ -63,14 +63,14 @@
     //add Mosaik attribution
     credits.addAttribution('&copy;Mosaik (Jan 2016), FCC Form 477 (Dec. 2015)');
 
-    var tMosaik = L.mapbox.tileLayer('fcc20554.b2h17ilw');
-    var tF477 = L.mapbox.tileLayer('fcc20554.c1jiao6y');
+    var tMosaik = L.mapbox.tileLayer('fcc.ba81be1o');
+    var tF477 = L.mapbox.tileLayer('fcc.dljyg4rq');
 
     L.control.layers({
         'Coverage based on Mosaik': tMosaik,
         'Coverage based on FCC Form 477': tF477.addTo(map),
     }, {
-        'States': L.mapbox.tileLayer('fcc20554.WLB_State').addTo(map)
+        'States': L.mapbox.tileLayer('fcc.88sbhq44').addTo(map)
     }, {
         collapsed: false,
         position: 'bottomright'
