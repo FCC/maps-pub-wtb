@@ -53,6 +53,8 @@
         minZoom: 4,
         maxZoom: 7
     });
+        
+    L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10').addTo(map);
     //set attribution to false, so doesn't pull layer names (i.e., "OverallMobile_18th")
 
     // add new attribution, in place of auto-generated -adds Leaflet attribution
